@@ -44,6 +44,8 @@ spec:
               value: {{ .Values.config.database.hosts }}
             - name: PREAUTHBRIDGE_NATS_URL
               value: {{ .Values.config.nats.url }}
+            - name: PREAUTHBRIDGE_NATS_REQUEST_TIMEOUT
+              value: {{ .Values.config.nats.timeoutInSec }}
             - name: PREAUTHBRIDGE_OAUTH_SIGNER_TOPIC
               value: {{ .Values.config.oAuth.signerTopic }}
             - name: PREAUTHBRIDGE_OAUTH_SIGNER_JWKS_URL
