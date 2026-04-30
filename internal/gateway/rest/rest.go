@@ -173,23 +173,23 @@ func (a API) GetTokenHandler(c *fiber.Ctx) error {
 			return c.Status(fiber.StatusBadRequest).JSON(InvalidErrorResponse)
 		}
 
-		tokenResp.AuthorizationDetails = &oauth.AuthorizationDetails{
+		tokenResp.AuthorizationDetails = []oauth.AuthorizationDetails{{
 			Type:                      "openid_credential",
 			CredentialConfigurationID: details.CredentialConfigurationID,
 			CredentialIdentifiers:     details.CredentialIdentifiers,
 			Claims:                    details.Claims,
-		}
+		}}
 
 		configuration = &storedAuth.CredentialConfigurations[index]
 
 	} else {
 		if len(storedAuth.CredentialConfigurations) == 1 {
-			tokenResp.AuthorizationDetails = &oauth.AuthorizationDetails{
+			tokenResp.AuthorizationDetails = []oauth.AuthorizationDetails{{
 				Type:                      "openid_credential",
 				CredentialConfigurationID: storedAuth.CredentialConfigurations[0].Id,
 				CredentialIdentifiers:     storedAuth.CredentialConfigurations[0].CredentialIdentifier,
 				Claims:                    storedAuth.Claims,
-			}
+			}}
 			configuration = &storedAuth.CredentialConfigurations[0]
 		}
 
